@@ -4,11 +4,11 @@ The apartment and room scraper is the main pillar of my website https://mieszkan
 
 ## Why this app was created
 
-Powstała ona po to, aby pomóc użytkownikom największego serwisu ogłoszeniowego w Polsce w znalezieniu mieszkań lub pokojów po prawdziwej cenie, uwzględniającej czynsz administracyjny oraz dodatkowe opłaty, takie jak media, prąd, woda i gaz. Więc przykładowo jeśli w filtrach ustawiliśmy mieszkanie do 3000zł to samo mieszkanie może kosztować nawet ponad 4000zł. Dzięki tej aplikacji wraz z moją stroną internetową, filtrujemy po prawdziwej cenie.
+It was created to help users of the largest classified ads website in Poland find apartments or rooms at a fair price, taking into account administrative fees and additional charges such as utilities, electricity, water, and gas. For example, if we set the filter for an apartment up to 3000 PLN, the same apartment could actually cost over 4000 PLN. Thanks to this application along with my website, we filter by the actual price.
 
 ## How this app works
 
-It was created to help users of the largest classified ads website in Poland find apartments or rooms at a fair price, taking into account administrative fees and additional charges such as utilities, electricity, water, and gas. For example, if we set the filter for an apartment up to 3000 PLN, the same apartment could actually cost over 4000 PLN. Thanks to this application along with my website, we filter by the actual price.
+In the main file of the application, the function create_room_table('city') or create_apartment_table('city') is called, which creates a table in the database if it does not exist yet. Then an instance of the class RoomScraper('city') or ApartmentScraper('city') is created and the start method is called. The program scrapes all the offer subpages for a given city and saves them to the database. Thanks to a separate thread for each subpage, the whole process is much faster.
 
 On the website, the user selects the city and filters, and the query is sent to the server, which returns relevant offers from the database.
 
