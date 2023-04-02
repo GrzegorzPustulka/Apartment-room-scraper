@@ -7,17 +7,17 @@ __status__ = "Development"
 from Scraper.ApartmentScraper import ApartmentScraper
 from Scraper.RoomScraper import RoomScraper
 from database.createTable import create_room_table, create_apartment_table
-
+import time
 
 if __name__ == '__main__':
-    create_room_table('lodz')
-    a = RoomScraper('lodz')
-    a.start()
+    # create_room_table('wroclaw')
+    # a = RoomScraper('wroclaw')
+    # a.start()
 
-    create_apartment_table('lodz')
-    b = ApartmentScraper('lodz')
-    b.start()
-
+    # create_apartment_table('wroclaw')
+    #
+    g = ApartmentScraper('wroclaw')
+    g.start()
 
 
 

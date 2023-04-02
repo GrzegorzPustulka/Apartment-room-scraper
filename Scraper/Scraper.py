@@ -35,6 +35,7 @@ class Scraper(ABC):
         for thread in self.threads:
             thread.join()
 
+        self.ads = self.remove_duplicates(self.ads)
         self.insert_db(self.ads, self.city)
 
     def get_soup(self, link):
@@ -60,3 +61,10 @@ class Scraper(ABC):
         text_prices = ''.join(i.text.replace(' ', '').replace(',', '.') for i in olx_buffer_prices)
         olx_prices = [float(x) for x in re.findall(r'\d*\.\d+|\d+', text_prices)]
         return olx_prices
+
+    def remove_duplicates(self, duplicate_list):
+        unique_list = []
+        for ad in duplicate_list:
+            if ad not in unique_list:
+                unique_list.append(ad)
+        return unique_list

@@ -30,16 +30,18 @@ class ApartmentScraper(Scraper):
 
             if "olx.pl" in link:
                 olx_rent, olx_area, olx_rooms, = tag_scraping(soup)
-                image = image_scraping(soup)
+                images = image_scraping(soup)
                 bills = description_scraping(soup, olx_rent)
+                source = 'olx'
             else:
                 olx_rent = rent_scraping(soup)
                 olx_area = area_scraping(soup)
                 olx_rooms = room_type_scraping(soup)
-                image = ""
+                images = ""
                 bills = 0
-            ad = AdsApartment(olx_ad[i], olx_area, districts[i], olx_rooms, olx_prices[i], olx_rent, bills,
-                              olx_prices[i] + olx_rent + bills, image)
+                source = 'otodom'
+            ad = AdsApartment(olx_ad[i], source, olx_area, districts[i], olx_rooms, olx_prices[i], olx_rent, bills,
+                              olx_prices[i] + olx_rent + bills, images)
             with self.lock:
                 self.ads.append(ad)
 

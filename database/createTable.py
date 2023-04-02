@@ -17,13 +17,14 @@ def create_room_table(city: str) -> None:
         create_table_query = f"""
         CREATE TABLE room_{city} (
             ID INT NOT NULL AUTO_INCREMENT,
+            source VARCHAR(30) NOT NULL,
             link VARCHAR(255) NOT NULL,
             district VARCHAR(255) NULL,
-            room VARCHAR(255) NULL,
+            room_type VARCHAR(255) NULL,
             price FLOAT NOT NULL,
             bills FLOAT NULL,
             total FLOAT NULL,
-            image VARCHAR(16384) NULL,
+            images VARCHAR(16384) NULL,
             PRIMARY KEY (id)
         ) ENGINE=InnoDB;
         """
@@ -47,14 +48,15 @@ def create_apartment_table(city: str) -> None:
         CREATE TABLE apartment_{city} (
             ID INT NOT NULL AUTO_INCREMENT,
             link VARCHAR(255) NOT NULL,
+            source VARCHAR(30) NOT NULL,
             area FLOAT NULL,
             district VARCHAR(255) NULL,
-            type_room VARCHAR(255) NULL,
+            room_type VARCHAR(255) NULL,
             price FLOAT NOT NULL,
             rent FLOAT NULL,
             bills FLOAT NULL,
             total FLOAT NULL,
-            image VARCHAR(16384) NULL,
+            images VARCHAR(2048) NULL,
             PRIMARY KEY (id)
         ) ENGINE=InnoDB;
         """

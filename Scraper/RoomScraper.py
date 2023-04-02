@@ -29,17 +29,19 @@ class RoomScraper(Scraper):
             soup = self.get_soup(link)
 
             if "olx.pl" in link:
-                image = image_scraping(soup)
+                images = image_scraping(soup)
                 additional_fees = description_scraping(soup)
+                source = 'olx'
                 if additional_fees == -1:
                     break
-                type_room = tag_scraping(soup)
+                room_type = tag_scraping(soup)
             else:
                 additional_fees = rent_scraping(soup)
-                type_room = room_type_scraping(soup)
-                image = ''
-            ad = AdsRoom(olx_ad[i], districts[i], type_room, olx_prices[i], additional_fees,
-                         olx_prices[i] + additional_fees, image)
+                room_type = room_type_scraping(soup)
+                images = ''
+                source = 'otodom'
+            ad = AdsRoom(olx_ad[i], source, districts[i], room_type, olx_prices[i], additional_fees,
+                         olx_prices[i] + additional_fees, images)
             with self.lock:
                 self.ads.append(ad)
 

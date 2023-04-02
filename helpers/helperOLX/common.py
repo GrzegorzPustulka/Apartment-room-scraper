@@ -1,9 +1,3 @@
-import requests
-import base64
-from PIL import Image
-from io import BytesIO
-
-
 def image_scraping(soup):
     images = []
     containers = soup.select('.swiper-zoom-container')

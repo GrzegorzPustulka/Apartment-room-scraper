@@ -17,16 +17,17 @@ def insert_apartments_db(ads, city):
         cur.execute(f'TRUNCATE TABLE apartment_{city};')
         for apartment in ads:
             link = apartment.link
+            source = apartment.source
             area = apartment.area
             district = apartment.district
-            type_room = apartment.type_room
+            room_type = apartment.room_type
             price = apartment.price
             rent = apartment.rent
             bills = apartment.bills
             total = apartment.total
-            image = ",".join(apartment.image)
+            images = ",".join(apartment.images)
 
-            insert_query = f"INSERT INTO apartment_{city} (link, area, district, type_room, price, rent, bills, total, image) VALUES ('{link}', {area}, '{district}', '{type_room}', {price}, {rent}, {bills}, {total}, '{image}')"
+            insert_query = f"INSERT INTO apartment_{city} (link, source, area, district, room_type, price, rent, bills, total, images) VALUES ('{link}','{source}', '{area}', '{district}', '{room_type}', '{price}', '{rent}', '{bills}', '{total}', '{images}')"
             cur.execute(insert_query)
         conn.commit()
         cur.close()
@@ -46,14 +47,15 @@ def insert_rooms_db(ads, city):
         cur.execute(f'TRUNCATE TABLE room_{city};')
         for flat in ads:
             link = flat.link
+            source = flat.source
             district = flat.district
-            room = flat.room
+            room_type = flat.room_type
             price = flat.price
             bills = flat.bills
             total = flat.total
-            image = ",".join(flat.image)
+            images = ",".join(flat.images)
 
-            insert_query = f"INSERT INTO room_{city} (link, district, room, price, bills, total, image) VALUES ('{link}', '{district}', '{room}', {price}, {bills}, {total}, '{image}')"
+            insert_query = f"INSERT INTO room_{city} (link,source, district, room_type, price, bills, total, images) VALUES ('{link}','{source}', '{district}', '{room_type}', '{price}', '{bills}', '{total}', '{images}')"
             cur.execute(insert_query)
         conn.commit()
         cur.close()
