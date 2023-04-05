@@ -6,6 +6,7 @@ from helpers.helperOTODOM.common import rent_scraping
 from Scraper.Scraper import Scraper
 from dataClasses.dataClass import AdsApartment
 from database.insertDB import insert_apartments_db
+from helpers.helperOTODOM.common import image_scraping_otodom
 
 
 class ApartmentScraper(Scraper):
@@ -37,7 +38,7 @@ class ApartmentScraper(Scraper):
                 olx_rent = rent_scraping(soup)
                 olx_area = area_scraping(soup)
                 olx_rooms = room_type_scraping(soup)
-                images = ""
+                images = image_scraping_otodom(soup)
                 bills = 0
                 source = 'otodom'
             ad = AdsApartment(olx_ad[i], source, olx_area, districts[i], olx_rooms, olx_prices[i], olx_rent, bills,

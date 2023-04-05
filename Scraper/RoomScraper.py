@@ -6,7 +6,7 @@ from helpers.helperOTODOM.room import room_type_scraping
 from Scraper.Scraper import Scraper
 from dataClasses.dataClass import AdsRoom
 from database.insertDB import insert_rooms_db
-import requests
+from helpers.helperOTODOM.common import image_scraping_otodom
 
 
 class RoomScraper(Scraper):
@@ -38,7 +38,7 @@ class RoomScraper(Scraper):
             else:
                 additional_fees = rent_scraping(soup)
                 room_type = room_type_scraping(soup)
-                images = ''
+                images = image_scraping_otodom(soup)
                 source = 'otodom'
             ad = AdsRoom(olx_ad[i], source, districts[i], room_type, olx_prices[i], additional_fees,
                          olx_prices[i] + additional_fees, images)
