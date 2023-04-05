@@ -16,6 +16,8 @@ On the website, the user selects the city and filters, and the query is sent to 
 
 - Scraper - There are three files here. Scraper is an abstract class from which the other two classes, ApartmentScraper and RoomScraper, inherit. The main logic of the application for scraping OLX is implemented in these classes.
 
+- database - Here are the functions that create an ssh tunnel to the database, create the tables and insert data into it.
+
 - dataClasses - This is the file with dataClasses, which stores our data.
 
 - helpers - Here are the helper functions for scraping OLX, such as scraping descriptions, tags, photos, etc.
