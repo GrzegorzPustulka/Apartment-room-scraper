@@ -24,6 +24,7 @@ def create_room_table(city: str) -> None:
             price FLOAT NOT NULL,
             bills FLOAT NULL,
             total FLOAT NULL,
+            date VARCHAR(255) NULL,
             images VARCHAR(16384) NULL,
             PRIMARY KEY (id)
         ) ENGINE=InnoDB;
@@ -56,6 +57,8 @@ def create_apartment_table(city: str) -> None:
             rent FLOAT NULL,
             bills FLOAT NULL,
             total FLOAT NULL,
+            indicators BOOLEAN DEFAULT FALSE,
+            date VARCHAR(255) NULL,
             images VARCHAR(2048) NULL,
             PRIMARY KEY (id)
         ) ENGINE=InnoDB;

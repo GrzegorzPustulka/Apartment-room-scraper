@@ -25,9 +25,11 @@ def insert_apartments_db(ads, city):
             rent = apartment.rent
             bills = apartment.bills
             total = apartment.total
+            indicators = apartment.indicators
+            date = apartment.date
             images = ",".join(apartment.images)
 
-            insert_query = f"INSERT INTO apartment_{city} (link, source, area, district, room_type, price, rent, bills, total, images) VALUES ('{link}','{source}', '{area}', '{district}', '{room_type}', '{price}', '{rent}', '{bills}', '{total}', '{images}')"
+            insert_query = f"INSERT INTO apartment_{city} (link, source, area, district, room_type, price, rent, bills, total, indicators, date, images) VALUES ('{link}','{source}', '{area}', '{district}', '{room_type}', '{price}', '{rent}', '{bills}', '{total}','{indicators}','{date}', '{images}')"
             cur.execute(insert_query)
         conn.commit()
         cur.close()
@@ -53,9 +55,10 @@ def insert_rooms_db(ads, city):
             price = flat.price
             bills = flat.bills
             total = flat.total
+            date = flat.date
             images = ",".join(flat.images)
 
-            insert_query = f"INSERT INTO room_{city} (link,source, district, room_type, price, bills, total, images) VALUES ('{link}','{source}', '{district}', '{room_type}', '{price}', '{bills}', '{total}', '{images}')"
+            insert_query = f"INSERT INTO room_{city} (link,source, district, room_type, price, bills, total, date, images) VALUES ('{link}','{source}', '{district}', '{room_type}', '{price}', '{bills}', '{total}','{date}', '{images}')"
             cur.execute(insert_query)
         conn.commit()
         cur.close()

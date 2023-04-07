@@ -52,9 +52,19 @@ class Scraper(ABC):
         olx_districts = soup.find_all("p", attrs={"data-testid": "location-date"})
         districts = []
         for district in olx_districts:
+            start = district.text.find(", ")
             end = district.text.find(" -")
-            districts.append(district.text[8:end])
+            districts.append(district.text[start:end])
         return districts
+
+    def get_date(self, soup):
+        olx_dates = soup.find_all("p", attrs={"data-testid": "location-date"})
+        dates = []
+        for date in olx_dates:
+            start = date.text.find(" - ")
+            start += 3
+            dates.append(date.text[start::])
+        return dates
 
     def get_prices(self, soup):
         olx_buffer_prices = soup.find_all("p", attrs={"data-testid": "ad-price"})

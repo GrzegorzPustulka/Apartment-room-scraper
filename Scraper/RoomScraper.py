@@ -23,6 +23,7 @@ class RoomScraper(Scraper):
         ad = soup.select("a.css-rc5s2u")
         olx_ad = olx_or_otodom(ad)
         districts = self.get_districts(soup)
+        date = self.get_date(soup)
         olx_prices = self.get_prices(soup)
 
         for i, link in enumerate(olx_ad):
@@ -41,7 +42,7 @@ class RoomScraper(Scraper):
                 images = image_scraping_otodom(soup)
                 source = 'otodom'
             ad = AdsRoom(olx_ad[i], source, districts[i], room_type, olx_prices[i], additional_fees,
-                         olx_prices[i] + additional_fees, images)
+                         olx_prices[i] + additional_fees, date[i], images)
             with self.lock:
                 self.ads.append(ad)
 

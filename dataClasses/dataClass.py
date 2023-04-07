@@ -16,6 +16,8 @@ class AdsApartment:
     rent: float
     bills: float
     total: float
+    indicators: bool
+    date: str
     images: list[str]
 
 
@@ -28,6 +30,7 @@ class AdsRoom:
     price: float
     bills: float
     total: float
+    date: str
     images: list[str]
 
 
@@ -41,4 +44,3 @@ class AdsNewApartment:
     rent: float
     bills: float
     total: float
-

@@ -24,6 +24,7 @@ class ApartmentScraper(Scraper):
         olx_ad = olx_or_otodom(ad)
 
         districts = self.get_districts(soup)
+        date = self.get_date(soup)
         olx_prices = self.get_prices(soup)
 
         for i, link in enumerate(olx_ad):
@@ -32,7 +33,7 @@ class ApartmentScraper(Scraper):
             if "olx.pl" in link:
                 olx_rent, olx_area, olx_rooms, = tag_scraping(soup)
                 images = image_scraping(soup)
-                bills = description_scraping(soup, olx_rent)
+                bills, indicators = description_scraping(soup, olx_rent)
                 source = 'olx'
             else:
                 olx_rent = rent_scraping(soup)
@@ -40,9 +41,10 @@ class ApartmentScraper(Scraper):
                 olx_rooms = room_type_scraping(soup)
                 images = image_scraping_otodom(soup)
                 bills = 0
+                indicators = False
                 source = 'otodom'
             ad = AdsApartment(olx_ad[i], source, olx_area, districts[i], olx_rooms, olx_prices[i], olx_rent, bills,
-                              olx_prices[i] + olx_rent + bills, images)
+                              olx_prices[i] + olx_rent + bills, indicators, date[i], images)
             with self.lock:
                 self.ads.append(ad)
 

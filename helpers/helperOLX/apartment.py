@@ -24,17 +24,27 @@ def description_scraping(soup, rent):
     except IndexError:
         return -1
     description = description.lower()
-    sentences = re.split(r'[.\n+]', description)
+    sentences = re.split(r'[.\n+,]', description)
     description_to_re = ''
-    unwanted_words = ['kaucj', 'opcjonaln', 'gara', 'parkin']
+    unwanted_words = ['kaucj', 'opcjonaln', 'gara', 'parkin', 'osoby', 'osobach']
+    indicators_words = ['licznik', 'wedlug', 'wg', 'zużyci','zuzyci']
+    indicators = False
     flag = True
     for sentence in sentences:
+        if sentence in 'eng':
+            break
         for unwanted_word in unwanted_words:
             if unwanted_word in sentence:
                 flag = False
                 break
         if flag:
-            description_to_re += sentence
+            for indicators_words in indicators_words:
+                mo = r"(\d+\s?,?\d+(zł|zl| zł| zl|pln| pln|koszty| koszty| \(|\())"
+                if len(re.findall(mo, sentence)) > 0:
+                    description_to_re += sentence
+                    break
+                else:
+                    indicators = True
         flag = True
     mo = r"(\d+\s?,?\d+(zł|zl| zł| zl|pln| pln|koszty| koszty| \(|\())"
     bills = re.findall(mo, description_to_re)
@@ -49,4 +59,4 @@ def description_scraping(soup, rent):
             continue
         else:
             additional_fees += bill
-    return additional_fees
+    return [additional_fees, indicators]

@@ -12,15 +12,10 @@ if __name__ == '__main__':
     # create_room_table('wroclaw')
     # a = RoomScraper('wroclaw')
     # a.start()
+    # create_apartment_table('krakow')
+    # a = ApartmentScraper('krakow')
+    # a.start()
 
-    # create_apartment_table('wroclaw')
-    #
-    g = ApartmentScraper('wroclaw')
-    g.start()
-
-    a = RoomScraper('wroclaw')
+    create_room_table('krakow')
+    a = RoomScraper('krakow')
     a.start()
-
-
-
-
