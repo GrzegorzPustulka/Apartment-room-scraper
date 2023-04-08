@@ -24,39 +24,37 @@ def description_scraping(soup, rent):
     except IndexError:
         return -1
     description = description.lower()
-    sentences = re.split(r'[.\n+,]', description)
+    sentences = re.split(r'[.\n+]', description)
     description_to_re = ''
     unwanted_words = ['kaucj', 'opcjonaln', 'gara', 'parkin', 'osoby', 'osobach']
-    indicators_words = ['licznik', 'wedlug', 'wg', 'zużyci','zuzyci']
-    indicators = False
     flag = True
     for sentence in sentences:
-        if sentence in 'eng':
-            break
         for unwanted_word in unwanted_words:
             if unwanted_word in sentence:
                 flag = False
                 break
         if flag:
-            for indicators_words in indicators_words:
-                mo = r"(\d+\s?,?\d+(zł|zl| zł| zl|pln| pln|koszty| koszty| \(|\())"
-                if len(re.findall(mo, sentence)) > 0:
-                    description_to_re += sentence
-                    break
-                else:
-                    indicators = True
+            description_to_re += sentence
         flag = True
-    mo = r"(\d+\s?,?\d+(zł|zl| zł| zl|pln| pln|koszty| koszty| \(|\())"
+
+    mo = r"(\d+\s?,?\d+(zł|zl| zł| zl|pln| pln|złoty| zloty| \(|\())"
     bills = re.findall(mo, description_to_re)
     bills = ["".join(x) for x in bills]
 
     for j in range(len(bills)):
         bills[j] = ''.join(x for x in bills[j] if x.isdigit())
     bills[:] = list(set(bills))
-    bills[:] = [float(x) for x in list(set(bills)) if float(x) < 600]
+    bills[:] = [float(x) for x in list(set(bills)) if float(x) < 700]
     for bill in bills:
         if float(bill) == rent:
             continue
         else:
             additional_fees += bill
+
+    indicators_words = ['licznik', 'wedlug', 'wg', 'zużyci', 'zuzyci', 'według', "+ media"]
+    indicators = False
+    for indicator in indicators_words:
+        if indicator in description:
+            indicators = True
+            break
     return [additional_fees, indicators]

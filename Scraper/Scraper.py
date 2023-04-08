@@ -54,7 +54,7 @@ class Scraper(ABC):
         for district in olx_districts:
             start = district.text.find(", ")
             end = district.text.find(" -")
-            districts.append(district.text[start:end])
+            districts.append(district.text[start+2:end])
         return districts
 
     def get_date(self, soup):
