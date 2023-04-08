@@ -16,7 +16,7 @@ class AdsApartment:
     rent: float
     bills: float
     total: float
-    indicators: bool
+    indicators: int
     date: str
     images: list[str]
 

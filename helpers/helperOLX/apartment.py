@@ -52,9 +52,9 @@ def description_scraping(soup, rent):
             additional_fees += bill
 
     indicators_words = ['licznik', 'wedlug', 'wg', 'zużyci', 'zuzyci', 'według', "+ media"]
-    indicators = False
+    indicators = 0
     for indicator in indicators_words:
         if indicator in description:
-            indicators = True
+            indicators = 1
             break
-    return [additional_fees, indicators]
+    return additional_fees, indicators

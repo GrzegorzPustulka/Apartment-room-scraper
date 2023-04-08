@@ -57,7 +57,7 @@ def create_apartment_table(city: str) -> None:
             rent FLOAT NULL,
             bills FLOAT NULL,
             total FLOAT NULL,
-            indicators BOOLEAN DEFAULT FALSE,
+            indicators BOOLEAN NULL,
             date VARCHAR(255) NULL,
             images VARCHAR(2048) NULL,
             PRIMARY KEY (id)
