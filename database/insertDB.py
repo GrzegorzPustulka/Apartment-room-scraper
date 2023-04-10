@@ -58,8 +58,40 @@ def insert_rooms_db(ads, city):
             date = flat.date
             images = ",".join(flat.images)
 
-            insert_query = f"INSERT INTO room_{city} (link,source, district, room_type, price, bills, total, date, images) VALUES ('{link}','{source}', '{district}', '{room_type}', '{price}', '{bills}', '{total}','{date}', '{images}')"
+            insert_query = f"INSERT INTO room_{city} (link, source, district, room_type, price, bills, total, date, images) VALUES ('{link}','{source}', '{district}', '{room_type}', '{price}', '{bills}', '{total}','{date}', '{images}')"
             cur.execute(insert_query)
         conn.commit()
         cur.close()
         conn.close()
+
+
+def add_user(email):
+    load_dotenv()
+    with create_ssh_tunnel() as tunnel:
+        conn = MySQLdb.connect(
+            user=os.getenv('USER'),
+            passwd=os.getenv('PASSWD'),
+            host='127.0.0.1', port=tunnel.local_bind_port,
+            db=os.getenv('DB'),
+        )
+        cur = conn.cursor()
+        insert_query = f"INSERT INTO users (email) VALUES ('{email}')"
+        cur.execute(insert_query)
+        conn.commit()
+        cur.close()
+
+
+def add_new_apartment(city, link, area, district, room_type, price, rent, bills, total, indicators):
+    load_dotenv()
+    with create_ssh_tunnel() as tunnel:
+        conn = MySQLdb.connect(
+            user=os.getenv('USER'),
+            passwd=os.getenv('PASSWD'),
+            host='127.0.0.1', port=tunnel.local_bind_port,
+            db=os.getenv('DB'),
+        )
+        cur = conn.cursor()
+        insert_query = f"INSERT INTO new_apartment(link,city, area, district, room_type, price, rent, bills, total, indicators) VALUES ('{link}','{city}','{area}', '{district}', '{room_type}', '{price}', '{rent}', '{bills}','{total}', '{indicators}')"
+        cur.execute(insert_query)
+        conn.commit()
+        cur.close()

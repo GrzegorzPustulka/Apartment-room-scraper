@@ -44,3 +44,4 @@ class AdsNewApartment:
     rent: float
     bills: float
     total: float
+    indicators: int
