@@ -1,6 +1,6 @@
 # Apartment-room-scraper
 
-The apartment and room scraper is the main pillar of my website https://mieszkaniator.vercel.app/search, which is an improved version of my previous project https://github.com/GrzegorzPustulka/Olx-Apartment-finder-GUI. This application is still under development.
+The apartment and room scraper is the main pillar of my website https://mieszkaniator.vercel.app/search (currently disabled), link to project(https://github.com/jakubjanuchta/apartments-app), which is an improved version of my previous project https://github.com/GrzegorzPustulka/Olx-Apartment-finder-GUI. This application is still under development.
 
 ## Why this app was created
 
