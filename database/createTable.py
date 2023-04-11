@@ -119,7 +119,7 @@ def create_apartment_filters_table():
         conn.close()
 
 
-def create_new_apartment_table() -> None:
+def create_room_filters_table():
     load_dotenv()
     with create_ssh_tunnel() as tunnel:
         conn = MySQLdb.connect(
@@ -130,22 +130,18 @@ def create_new_apartment_table() -> None:
         )
         cur = conn.cursor()
         create_table_query = f"""
-        CREATE TABLE new_apartment (
-            ID INT NOT NULL AUTO_INCREMENT,
-            link VARCHAR(255) NOT NULL,
-            city VARCHAR(255) NOT NULL,
-            area FLOAT NULL,
-            district VARCHAR(255) NULL,
-            room_type VARCHAR(255) NULL,
-            price FLOAT NOT NULL,
-            rent FLOAT NULL,
-            bills FLOAT NULL,
-            total FLOAT NULL,
-            indicators BOOLEAN NULL,
-            PRIMARY KEY (id)
-        ) ENGINE=InnoDB;
+        CREATE TABLE room_filters (
+        id_filtr INT PRIMARY KEY AUTO_INCREMENT,
+        city VARCHAR(255) NOT NULL,
+        price FLOAT NOT NULL,
+        district VARCHAR(255) NOT NULL,
+        room_type Varchar(255) NOT NULL,
+        id_user INT,
+        FOREIGN KEY (id_user) REFERENCES users(id_user)
+        );
         """
         cur.execute(create_table_query)
         conn.commit()
         cur.close()
         conn.close()
+

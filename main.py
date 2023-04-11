@@ -9,7 +9,7 @@ from Scraper.ApartmentScraper import ApartmentScraper
 from Scraper.RoomScraper import RoomScraper
 from database.createTable import create_room_table, create_apartment_table, create_apartment_filters_table, \
                                  create_users_table, create_new_apartment_table
-from database.CompareFilters import compare_filters_new_apartment
+
 from database.insertDB import add_user
 from newScraper.NewApartmentScraper import NewApartmentScraper
 
@@ -25,7 +25,8 @@ if __name__ == '__main__':
     # a.start()
     #
     # create_new_apartment_table()
-    # a = NewApartmentScraper('krakow')
-    # a.start()
-    # check_filters_new_apartment = threading.Thread(target=compare_filters_new_apartment)
+    a = NewApartmentScraper('krakow')
+    a.start()
+    # compare_filters_new_apartment()
     # add_user('grzegorzpustulka@onet.pl')
+    # pass

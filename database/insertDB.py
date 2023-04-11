@@ -91,6 +91,9 @@ def add_new_apartment(city, link, area, district, room_type, price, rent, bills,
             db=os.getenv('DB'),
         )
         cur = conn.cursor()
+        city_value = city
+        delete_query = f"DELETE FROM new_apartment WHERE city = '{city_value}'"
+        cur.execute(delete_query)
         insert_query = f"INSERT INTO new_apartment(link,city, area, district, room_type, price, rent, bills, total, indicators) VALUES ('{link}','{city}','{area}', '{district}', '{room_type}', '{price}', '{rent}', '{bills}','{total}', '{indicators}')"
         cur.execute(insert_query)
         conn.commit()

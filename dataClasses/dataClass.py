@@ -32,16 +32,3 @@ class AdsRoom:
     total: float
     date: str
     images: list[str]
-
-
-@dataclass
-class AdsNewApartment:
-    link: str
-    area: str
-    district: str
-    type_room: str
-    price: float
-    rent: float
-    bills: float
-    total: float
-    indicators: int
